@@ -1,4 +1,4 @@
-package com.example.sachtruyenoffline.adapter;
+package com.example.sachtruyenoffline.activity;
 
 import android.content.Context;
 import android.content.Intent;
@@ -9,10 +9,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.sachtruyenoffline.R;
-import com.example.sachtruyenoffline.activity.ActInformation;
+import com.example.sachtruyenoffline.moder.MucLuc;
+import com.example.sachtruyenoffline.moder.Sach;
 import com.example.sachtruyenoffline.moder.SachKhoaHoc;
-import com.example.sachtruyenoffline.moder.Truyen;
-import com.example.sachtruyenoffline.moder.TruyenVietNam;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -21,26 +20,25 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 
-public class TruyenVietNamAdapter extends RecyclerView.Adapter<TruyenVietNamAdapter.MyRecycleview> {
+public class MucLucAdapter extends RecyclerView.Adapter<MucLucAdapter.MyRecycleview> {
 private Context mContext;
-private List<TruyenVietNam> truyenVietNamList;
-
-
-    public TruyenVietNamAdapter(Context mContext, List<TruyenVietNam> truyenVietNamList) {
+private List<MucLuc> mucLucList;
+    public MucLucAdapter(Context mContext, List<MucLuc> mucLucList) {
         this.mContext = mContext;
-        this.truyenVietNamList = truyenVietNamList;
+        this.mucLucList = mucLucList;
     }
 
     @NonNull
     @Override
     public MyRecycleview onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view;
-        LayoutInflater mInflater = LayoutInflater.from(mContext);
-        view = mInflater.inflate(R.layout.row_list_sach,parent,false);
+        final LayoutInflater mInflater = LayoutInflater.from(mContext);
+        view = mInflater.inflate(R.layout.row_mucluc,parent,false);
+
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(mContext, ActInformation.class);
+                Intent intent = new Intent(mContext, ActShow.class);
                 mContext.startActivity(intent);
             }
         });
@@ -51,28 +49,31 @@ private List<TruyenVietNam> truyenVietNamList;
     @Override
     public void onBindViewHolder(@NonNull MyRecycleview holder, int position) {
 
-        TruyenVietNam truyenVietNam = truyenVietNamList.get(position);
 
-        holder.tv_Name.setText(truyenVietNamList.get(position).getNameSach());
-        Picasso.with(mContext).load(truyenVietNam.anh).into(holder.anh);
+        holder.tv_NameMuc.setText(mucLucList.get(position).getNamemuc());
+        holder.tv_Title.setText(mucLucList.get(position).getTitle());
+
 
 
     }
 
     @Override
     public int getItemCount() {
-        return truyenVietNamList.size();
+        return mucLucList.size();
     }
 
     public class MyRecycleview extends RecyclerView.ViewHolder{
-        TextView tv_Name;
-        ImageView anh;
+        TextView tv_NameMuc, tv_Title;
+
 
 
         public MyRecycleview(@NonNull View itemView) {
             super(itemView);
-            anh = (ImageView) itemView.findViewById(R.id.imgAvataSach);
-            tv_Name = (TextView)  itemView.findViewById(R.id.tvNamesach);
+
+            tv_NameMuc = (TextView)  itemView.findViewById(R.id.tvNameMuc);
+            tv_Title = (TextView)  itemView.findViewById(R.id.tvTitleMuc);
+
+
 
         }
     }

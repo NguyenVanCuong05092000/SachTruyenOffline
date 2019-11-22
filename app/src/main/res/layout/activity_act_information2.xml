@@ -7,6 +7,7 @@
     tools:context=".activity.ActInformation">
 
     <ImageView
+        android:src="@drawable/maxresdefault"
         android:id="@+id/imgTTAvata"
         android:layout_width="81dp"
         android:layout_height="123dp"
@@ -19,113 +20,121 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.3"/>
+        app:layout_constraintGuide_percent="0.3" />
+
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guiV50"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.5"/>
+        app:layout_constraintGuide_percent="0.5" />
 
     <TextView
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/guiV30"
         style="@style/tvThongTin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/name_ThongTin"/>
+        android:text="@string/name_ThongTin"
+        app:layout_constraintStart_toEndOf="@+id/guiV30"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <TextView
         android:id="@+id/tvNameTT"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/guiV50"
         style="@style/lblThongTin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Đắc nhân tâm"/>
+        android:text="Đắc nhân tâm"
+        app:layout_constraintStart_toEndOf="@+id/guiV50"
+        app:layout_constraintTop_toTopOf="parent" />
 
 
     <TextView
-        app:layout_constraintTop_toBottomOf="@id/tvNameTT"
-        app:layout_constraintStart_toEndOf="@+id/guiV30"
         style="@style/tvThongTin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/TacGia_ThongTin"/>
+        android:text="@string/TacGia_ThongTin"
+        app:layout_constraintStart_toEndOf="@+id/guiV30"
+        app:layout_constraintTop_toBottomOf="@id/tvNameTT" />
+
     <TextView
         android:id="@+id/tvTacGiaTT"
-        app:layout_constraintTop_toBottomOf="@id/tvNameTT"
-        app:layout_constraintStart_toEndOf="@+id/guiV50"
         style="@style/lblThongTin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Dale Carnegie"/>
+        android:text="Dale Carnegie"
+        app:layout_constraintStart_toEndOf="@+id/guiV50"
+        app:layout_constraintTop_toBottomOf="@id/tvNameTT" />
 
 
     <TextView
-        app:layout_constraintTop_toBottomOf="@id/tvTacGiaTT"
-        app:layout_constraintStart_toEndOf="@+id/guiV30"
         style="@style/tvThongTin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/nxb_ThongTin"/>
+        android:text="@string/nxb_ThongTin"
+        app:layout_constraintStart_toEndOf="@+id/guiV30"
+        app:layout_constraintTop_toBottomOf="@id/tvTacGiaTT" />
+
     <TextView
         android:id="@+id/tvNXBTT"
-        app:layout_constraintTop_toBottomOf="@id/tvTacGiaTT"
-        app:layout_constraintStart_toEndOf="@+id/guiV50"
         style="@style/lblThongTin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Văn Hóa Thông Tin"/>
-
+        android:text="Văn Hóa Thông Tin"
+        app:layout_constraintStart_toEndOf="@+id/guiV50"
+        app:layout_constraintTop_toBottomOf="@id/tvTacGiaTT" />
 
     <TextView
-        app:layout_constraintTop_toBottomOf="@id/tvNXBTT"
-        app:layout_constraintStart_toEndOf="@+id/guiV30"
         style="@style/tvThongTin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/SoMuc_ThongTin"/>
+        android:text="@string/SoMuc_ThongTin"
+        app:layout_constraintStart_toEndOf="@+id/guiV30"
+        app:layout_constraintTop_toBottomOf="@id/tvNXBTT" />
+
     <TextView
         android:id="@+id/tvSoMucTT"
-        app:layout_constraintTop_toBottomOf="@id/tvNXBTT"
-        app:layout_constraintStart_toEndOf="@+id/guiV50"
         style="@style/lblThongTin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="40"/>
+        android:text="40"
+        app:layout_constraintStart_toEndOf="@+id/guiV50"
+        app:layout_constraintTop_toBottomOf="@id/tvNXBTT" />
 
     <TextView
-        app:layout_constraintTop_toBottomOf="@id/tvSoMucTT"
-        app:layout_constraintStart_toEndOf="@+id/guiV30"
         style="@style/tvThongTin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/Nguon_ThongTin"/>
+        android:text="@string/Nguon_ThongTin"
+        app:layout_constraintStart_toEndOf="@+id/guiV30"
+        app:layout_constraintTop_toBottomOf="@id/tvSoMucTT" />
+
     <TextView
         android:id="@+id/tvNguonTT"
-        app:layout_constraintTop_toBottomOf="@id/tvSoMucTT"
-        app:layout_constraintStart_toEndOf="@+id/guiV50"
         style="@style/lblThongTin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Sưu tầm"/>
+        android:text="Sưu tầm"
+        app:layout_constraintStart_toEndOf="@+id/guiV50"
+        app:layout_constraintTop_toBottomOf="@id/tvSoMucTT" />
 
-<TextView
-    android:id="@+id/tvMucLuc"
-    android:textColor="@color/RedColor"
-    android:gravity="center"
-    android:textStyle="bold"
-    android:layout_marginTop="10dp"
-    android:textSize="20sp"
-    android:text="@string/mucLuc"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    app:layout_constraintTop_toBottomOf="@+id/tvNguonTT"/>
+    <TextView
+        android:id="@+id/tvMucLuc"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:gravity="center"
+        android:text="@string/mucLuc"
+        android:textColor="@color/RedColor"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintTop_toBottomOf="@+id/tvNguonTT" />
 
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/ryMucLuc"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvMucLuc"
-        android:id="@+id/ryMucLuc"/>
+        app:layout_constraintVertical_bias="0.0"
+        tools:layout_editor_absoluteX="0dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>
