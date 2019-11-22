@@ -90,6 +90,7 @@
                 android:textStyle="bold" />
 
             <TextView
+                android:id="@+id/tvDoc"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingLeft="5dp"
@@ -262,6 +263,7 @@ Cảnh sát trưởng New York, ông E. P. Mulrooney nhấn mạnh rằng tên C
             android:src="@drawable/icons_next" />
 
         <RadioGroup
+            android:id="@+id/groupRadio"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_toRightOf="@+id/imgNext"

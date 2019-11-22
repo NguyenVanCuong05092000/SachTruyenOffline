@@ -8,4 +8,6 @@
     <color name="RedColor">#DE0D0D</color>
     <color name="BlackColor">#000000</color>
     <color name="TextColor">#00D3FF</color>
+    <color name="VangColor">#9E8247</color>
+    <color name="XamColor">#312919</color>
 </resources>
