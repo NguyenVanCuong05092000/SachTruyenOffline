@@ -17,26 +17,22 @@
         android:background="@drawable/background_search"
         app:layout_constraintTop_toTopOf="parent">
 
-        <ImageView
-            android:id="@+id/img_navMenu"
-            android:layout_width="55dp"
-            android:layout_height="0dp"
-            android:onClick="menu"
-            android:src="@drawable/nav_img_menu"
-            app:layout_constraintBottom_toBottomOf="@+id/edtSearch"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
 
-        <EditText
+
+        <AutoCompleteTextView
+            android:layout_marginHorizontal="10dp"
             android:id="@+id/edtSearch"
             android:layout_width="0dp"
             android:layout_height="50dp"
             android:backgroundTint="@color/WhiteColor"
             android:hint="Search"
+            android:imeOptions="actionDone"
+            android:singleLine="true"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toEndOf="@+id/img_navMenu"
-            app:layout_constraintTop_toTopOf="parent" />
+          app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" >
+        </AutoCompleteTextView>
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,6 +1,8 @@
 package com.example.sachtruyenoffline.activity;
 
+import android.app.Activity;
 import android.content.ContentValues;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
@@ -15,8 +17,10 @@ import android.widget.LinearLayout;
 import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.sachtruyenoffline.R;
@@ -44,7 +48,7 @@ public class ActShow extends AppCompatActivity {
     private SachTruyenSqlite sachTruyenSqlite;
     private SharedPreferences sharedPreferences, sharedPreferences1;
     MucLuc mucLuc;
-    int imagev;
+    AlertDialog.Builder builder;
 
     private CallbackManager callbackManager;
 
@@ -59,6 +63,7 @@ public class ActShow extends AppCompatActivity {
         FacebookSdk.sdkInitialize(ActShow.this.getApplicationContext());
         callbackManager = CallbackManager.Factory.create();
         shareDialog = new ShareDialog(ActShow.this);
+        builder = new AlertDialog.Builder(this);
         shareDialog.registerCallback(callbackManager, callback);
 
 
@@ -86,6 +91,7 @@ public class ActShow extends AppCompatActivity {
         setNameSachShow();
         nextAndSkip();
         setImageShare();
+
     }
 
 
@@ -118,10 +124,11 @@ public class ActShow extends AppCompatActivity {
         @Override
         public void onError(FacebookException error) {
 
-        }};
+        }
+    };
 
 
-        @Override
+    @Override
     protected void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
     }
@@ -167,12 +174,34 @@ public class ActShow extends AppCompatActivity {
         titleShow.setText(bundle.getString("title"));
         tvDoc.setText(bundle.getString("text"));
         idName = Integer.parseInt(bundle.getString("idName"));
-        dau = Integer.parseInt(bundle.getString("positionDau"));
+//        dau = Integer.parseInt(bundle.getString("positionDau"));
         i = Integer.parseInt(bundle.getString("position"));
         tvSoMucCt.setText(bundle.getString("stt"));
         u = i + 1;
-        cuoi = Integer.parseInt(bundle.getString("positionCuoi"));
+//        cuoi = Integer.parseInt(bundle.getString("positionCuoi"));
         mucLuc.setIdCT(i);
+
+        imgNext.setImageResource(R.drawable.icons_next);
+        SQLiteDatabase sqLiteDatabase = sachTruyenSqlite.getWritableDatabase();
+        String SachSQL = "SELECT MIN(Stt),Max(Stt) FROM ChiTiet WHERE IDName = " + idName;
+
+        Cursor cursor = sqLiteDatabase.rawQuery(SachSQL, null);
+
+        if (cursor != null) {
+            if (cursor.getCount() > 0) {
+
+                cursor.moveToFirst();
+                while (!cursor.isAfterLast()) {
+                    dau = Integer.parseInt(cursor.getString(cursor.getColumnIndex("MIN(Stt)")));
+                    cuoi = Integer.parseInt(cursor.getString(cursor.getColumnIndex("Max(Stt)")));
+                    cursor.moveToNext();
+
+                }
+                cursor.close();
+            }
+        }
+        sqLiteDatabase.close();
+
     }
 
     public void zoomLon(View view) {
@@ -218,13 +247,31 @@ public class ActShow extends AppCompatActivity {
     }
 
     public void Save(View view) {
-        saveID = mucLuc.getIdCT();
-        sachTruyenSqlite = new SachTruyenSqlite(this);
-        SQLiteDatabase sqLiteDatabase = sachTruyenSqlite.getReadableDatabase();
-        ContentValues contentValues = new ContentValues();
-        contentValues.put("IDCT", saveID);
-        sqLiteDatabase.update("Name", contentValues, "IDName" + "=?", new String[]{String.valueOf(idName)});
-        sqLiteDatabase.close();
+
+
+        builder.setMessage("Bạn có muốn lưu chương này không ?")
+                .setCancelable(false).setPositiveButton("Có", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                saveID = mucLuc.getIdCT();
+                SQLiteDatabase sqLiteDatabase = sachTruyenSqlite.getReadableDatabase();
+                ContentValues contentValues = new ContentValues();
+                contentValues.put("IDCT", saveID);
+                sqLiteDatabase.update("ThongTin", contentValues, "IDName" + "=?", new String[]{String.valueOf(idName)});
+                sqLiteDatabase.close();
+                Toast.makeText(getApplicationContext(), "Lưu thành công", Toast.LENGTH_SHORT).show();
+            }
+        }).setNegativeButton("Không", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+
+        AlertDialog alert = builder.create();
+        alert.setTitle("Lưu chương");
+        alert.show();
+
     }
 
     private void nextAndSkip() {
@@ -233,7 +280,7 @@ public class ActShow extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                if (u == cuoi + 1) {
+                if (cuoi == Integer.parseInt(tvSoMucCt.getText().toString())) {
                     AlphaAnimation alpha = new AlphaAnimation(0.5F, 0.5F);
                     alpha.setDuration(0);
                     alpha.setFillAfter(true);
@@ -262,10 +309,8 @@ public class ActShow extends AppCompatActivity {
                                 mucLuc.setTitle(cursor.getString(cursor.getColumnIndex("NameMuc")));
                                 tvSoMucCt.setText(cursor.getString(cursor.getColumnIndex("Stt")));
                                 titleShow.setText(mucLuc.getTitle());
-                                Log.e("dff", mucLuc.getTitle());
                                 tvDoc.setText(mucLuc.getNoidung());
                                 mucLuc.setIdCT(u - 1);
-                                Log.e("2", String.valueOf(mucLuc.getIdCT()));
                                 cursor.moveToNext();
 
                             }
@@ -281,7 +326,7 @@ public class ActShow extends AppCompatActivity {
         imgSkip.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (u == dau + 1) {
+                if (dau == Integer.parseInt(tvSoMucCt.getText().toString()) ) {
                     AlphaAnimation alpha = new AlphaAnimation(0.5F, 0.5F);
                     alpha.setDuration(0);
                     alpha.setFillAfter(true);
@@ -293,6 +338,8 @@ public class ActShow extends AppCompatActivity {
                     alpha.setFillAfter(true);
                     imgSkip.startAnimation(alpha);
                     imgNext.startAnimation(alpha);
+
+
 //                    imgSkip.setImageResource(R.drawable.icons_skip);
                     j = u--;
                     SQLiteDatabase sqLiteDatabase = sachTruyenSqlite.getWritableDatabase();
@@ -307,10 +354,8 @@ public class ActShow extends AppCompatActivity {
                                 mucLuc.setTitle(cursor.getString(cursor.getColumnIndex("NameMuc")));
                                 tvSoMucCt.setText(cursor.getString(cursor.getColumnIndex("Stt")));
                                 titleShow.setText(mucLuc.getTitle());
-                                Log.e("dff", mucLuc.getTitle());
                                 tvDoc.setText(mucLuc.getNoidung());
                                 mucLuc.setIdCT(j - 2);
-                                Log.e("3", String.valueOf(mucLuc.getIdCT()));
                                 cursor.moveToNext();
                             }
                             cursor.close();

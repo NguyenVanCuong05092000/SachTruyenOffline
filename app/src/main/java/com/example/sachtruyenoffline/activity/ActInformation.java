@@ -4,9 +4,11 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -52,7 +54,7 @@ public class ActInformation extends AppCompatActivity {
 
         Intent intent = getIntent();
         Bundle bundle = intent.getBundleExtra("TT");
-         id = Integer.parseInt(bundle.getString("i"));
+        id = Integer.parseInt(bundle.getString("i"));
 
         mucLucList = new ArrayList<>();
 
@@ -113,7 +115,7 @@ public class ActInformation extends AppCompatActivity {
 
                     Intent intent1 = new Intent(this, ActShow.class);
                     Bundle bundle1 = new Bundle();
-                    bundle1.putString("nameSach",thongTin.getTenSach());
+                    bundle1.putString("nameSach", thongTin.getTenSach());
                     intent1.putExtra("Name", bundle1);
 
                     cursor1.moveToNext();
@@ -124,9 +126,6 @@ public class ActInformation extends AppCompatActivity {
 
 
         }
-
-
-
 
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
@@ -142,43 +141,58 @@ public class ActInformation extends AppCompatActivity {
         SQLiteDatabase sqLiteDatabase = sachTruyenSqlite.getWritableDatabase();
         String SachSQL = "SELECT IDCT FROM ThongTin WHERE IDName =" + id;
 
-        Cursor cursor = sqLiteDatabase.rawQuery(SachSQL,null);
+        Cursor cursor = sqLiteDatabase.rawQuery(SachSQL, null);
 
-        if(cursor !=null) {
+        if (cursor != null) {
             if (cursor.getCount() > 0) {
 
                 cursor.moveToFirst();
                 while (!cursor.isAfterLast()) {
                     idsave = (Integer.parseInt(cursor.getString(cursor.getColumnIndex("IDCT"))));
+                    Log.e("IDCT", String.valueOf(idsave));
                     cursor.moveToNext();
+
                 }
                 cursor.close();
             }
-
         }
 
-//        String SaveID = "SELECT * FROM ChiTiet WHERE IDName = " + idsave;
-//
-//        Cursor cursor1 = sqLiteDatabase.rawQuery(SaveID, null);
-//
-//        if (cursor1 != null) {
-//            if (cursor1.getCount() > 0) {
-//
-//                cursor.moveToFirst();
-//                while (!cursor1.isAfterLast()) {
-//                    mucLuc.setIdCT(Integer.parseInt(cursor1.getString(cursor1.getColumnIndex("IDCT"))));
-//                    mucLuc.setNamemuc(cursor1.getString(cursor1.getColumnIndex("Muc")));
-//                    mucLuc.setNoidung(cursor1.getString(cursor1.getColumnIndex("NoiDung")));
-//                    mucLuc.setTitle(cursor1.getString(cursor1.getColumnIndex("NameMuc")));
-//                    mucLuc.setIdNameCT(Integer.parseInt(cursor1.getString(cursor1.getColumnIndex("IDName"))));
-//                    mucLuc.setStt(Integer.parseInt(cursor1.getString(cursor1.getColumnIndex("Stt"))));
-//                    mucLucList.add(mucLuc);
-//                    cursor.moveToNext();
-//                }
-//                cursor.close();
-//            }
+
+        if (idsave == 1) {
+            Toast.makeText(ActInformation.this, "Bạn chưa đoạc cuốn sách này lần nào", Toast.LENGTH_SHORT).show();
+        } else {
+            String Save = "SELECT * FROM ChiTiet WHERE IDCT = " + idsave;
+
+            Cursor cursor1 = sqLiteDatabase.rawQuery(Save, null);
+
+            if (cursor1 != null) {
+                if (cursor1.getCount() > 0) {
+
+                    cursor1.moveToFirst();
+                    while (!cursor1.isAfterLast()) {
+
+                        String idct = cursor1.getString(cursor1.getColumnIndex("IDCT"));
+                       String Noidung = cursor1.getString(cursor1.getColumnIndex("NoiDung"));
+                       String title  = cursor1.getString(cursor1.getColumnIndex("NameMuc"));
+                       String idName = cursor1.getString(cursor1.getColumnIndex("IDName"));
+                        String stt = cursor1.getString(cursor1.getColumnIndex("Stt"));
 
 
+                        Intent intent = new Intent(ActInformation.this, ActShow.class);
+                        Bundle bundle = new Bundle();
+                        bundle.putString("position", idct);
+                        bundle.putString("stt", stt);
+                        bundle.putString("idName", idName);
+                        bundle.putString("text", Noidung);
+                        bundle.putString("title", title);
+                        intent.putExtra("show", bundle);
+                        startActivity(intent);
+                        cursor1.moveToNext();
+                    }
+                    cursor1.close();
+                }
+            }
+        }
 
 
     }

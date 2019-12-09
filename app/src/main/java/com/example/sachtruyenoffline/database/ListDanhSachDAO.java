@@ -9,6 +9,7 @@ import com.example.sachtruyenoffline.moder.SachHoiky;
 import com.example.sachtruyenoffline.moder.SachKhoaHoc;
 import com.example.sachtruyenoffline.moder.SachKinhDoanh;
 import com.example.sachtruyenoffline.moder.SachTinhyeu;
+import com.example.sachtruyenoffline.moder.Search;
 import com.example.sachtruyenoffline.moder.Truyen;
 import com.example.sachtruyenoffline.moder.TruyenCuoi;
 import com.example.sachtruyenoffline.moder.TruyenKiemHiep;
@@ -64,6 +65,38 @@ public class ListDanhSachDAO {
         }
         return  sachList;
     }
+
+
+    public ArrayList<Search> getALL() {
+        ArrayList<Search> searchList = new ArrayList<>();
+        SQLiteDatabase sqLiteDatabase = sachTruyenSqlite.getWritableDatabase();
+        String SachSQL = "SELECT * FROM Name ";
+
+        Cursor cursor = sqLiteDatabase.rawQuery(SachSQL,null);
+
+        if(cursor !=null) {
+            if (cursor.getCount() > 0) {
+
+                cursor.moveToFirst();
+                while (!cursor.isAfterLast()) {
+                    Search search = new Search();
+
+                    search.setId(Integer.parseInt(cursor.getString(cursor.getColumnIndex(ID_NAME))));
+                    search.setNameSearch(cursor.getString(cursor.getColumnIndex(NAME)));
+
+
+                    searchList.add(search);
+                    cursor.moveToNext();
+
+                }
+                cursor.close();
+            }
+
+        }
+        return  searchList;
+    }
+
+
 
     public List<YeuThich> getAllYeuThich() {
         List<YeuThich> yeuThichList = new ArrayList<>();
