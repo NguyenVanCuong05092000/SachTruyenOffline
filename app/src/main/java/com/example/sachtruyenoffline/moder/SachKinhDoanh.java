@@ -1,15 +1,38 @@
 package com.example.sachtruyenoffline.moder;
 
 public class SachKinhDoanh {
+    public int idName;
+    public String styles;
     public String NameSach;
     public String anh;
+    public int like;
 
     public SachKinhDoanh() {
     }
 
-    public SachKinhDoanh(String nameSach, String anh) {
+
+    public SachKinhDoanh(int idName, String styles, String nameSach, String anh, int like) {
+        this.idName = idName;
+        this.styles = styles;
         NameSach = nameSach;
         this.anh = anh;
+        this.like = like;
+    }
+
+    public int getIdName() {
+        return idName;
+    }
+
+    public void setIdName(int idName) {
+        this.idName = idName;
+    }
+
+    public String getStyles() {
+        return styles;
+    }
+
+    public void setStyles(String styles) {
+        this.styles = styles;
     }
 
     public String getNameSach() {
@@ -26,5 +49,12 @@ public class SachKinhDoanh {
 
     public void setAnh(String anh) {
         this.anh = anh;
+    }
+    public int getLike() {
+        return like;
+    }
+
+    public void setLike(int like) {
+        this.like = like;
     }
 }

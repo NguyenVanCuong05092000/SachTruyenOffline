@@ -1,43 +1,33 @@
 package com.example.sachtruyenoffline.activity;
 
 import android.os.Bundle;
-
-import com.example.sachtruyenoffline.R;
-import com.example.sachtruyenoffline.adapter.MyFragmentAdapter;
-import com.example.sachtruyenoffline.fragment.FrmSach;
-import com.example.sachtruyenoffline.fragment.FrmTruyen;
-import com.example.sachtruyenoffline.fragment.FrmYeuthich;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
-
 import android.view.View;
-
-import androidx.core.view.GravityCompat;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
-import androidx.navigation.ui.AppBarConfiguration;
-import androidx.navigation.ui.NavigationUI;
-
-import com.google.android.material.navigation.NavigationView;
-import com.google.android.material.tabs.TabLayout;
-
-import androidx.drawerlayout.widget.DrawerLayout;
-
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.viewpager.widget.ViewPager;
-
-import android.view.Menu;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.navigation.ui.AppBarConfiguration;
+import androidx.viewpager.widget.ViewPager;
+
+import com.example.sachtruyenoffline.R;
+import com.example.sachtruyenoffline.adapter.MyFragmentAdapter;
+import com.example.sachtruyenoffline.database.SachTruyenSqlite;
+import com.example.sachtruyenoffline.fragment.FrmSach;
+import com.example.sachtruyenoffline.fragment.FrmTruyen;
+import com.example.sachtruyenoffline.fragment.FrmYeuthich;
+import com.google.android.material.navigation.NavigationView;
+import com.google.android.material.tabs.TabLayout;
+
 public class Main2Activity extends AppCompatActivity {
     TabLayout tabLayout;
     ViewPager viewPager;
+    FrmYeuthich frmYeuthich;
     RelativeLayout lblSachTHSub, lblSachKHSub, lblSachKDSub, lblSachTYSub, lblSachHKSub, lblTruyenTHSub, lblTruyenCuoiSub, lblTruyenKHSub, lbltruyenVNsub;
     LinearLayout subSachTH, lnSubKhoaHoc, lnSubKD, lnSubTY, lnSubHK, lnTruyenTH, lnSubTruyenCuoi, lnSubTruyenKH, lnSubTruyenVN;
-    ImageView imgMuitenSachTH, imgMuttenSachKH, imgMiuTenSachKD, imgMuiTenSachTY, imgMuiTenSachHK, imgMuiTenTruyenTH, imgMuiTenTruyenCuoi,imgMuiTenTruyenKH,imgMuiTenTruyenVN ;
+    ImageView imgMuitenSachTH, imgMuttenSachKH, imgMiuTenSachKD, imgMuiTenSachTY, imgMuiTenSachHK, imgMuiTenTruyenTH, imgMuiTenTruyenCuoi, imgMuiTenTruyenKH, imgMuiTenTruyenVN;
     private AppBarConfiguration.OnNavigateUpListener mAppBarConfiguration;
 
     @Override
@@ -45,16 +35,39 @@ public class Main2Activity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
 
+        SachTruyenSqlite sachTruyenSqlite = new SachTruyenSqlite(this);
+        sachTruyenSqlite.createDataBase();
+
         tabLayout = findViewById(R.id.tabHome);
         viewPager = findViewById(R.id.viewPagerHome);
-        MyFragmentAdapter adapter = new MyFragmentAdapter(getSupportFragmentManager());
+        final MyFragmentAdapter adapter = new MyFragmentAdapter(getSupportFragmentManager());
         adapter.addFragment(new FrmSach(), "Sách");
         adapter.addFragment(new FrmTruyen(), "Truyện");
         adapter.addFragment(new FrmYeuthich(), "Yêu thích");
 
+        viewPager.setOffscreenPageLimit(3);
         viewPager.setAdapter(adapter);
         tabLayout.setupWithViewPager(viewPager);
 
+        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                if (position == 2){
+
+                    FrmYeuthich.reload();
+                }
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
@@ -74,15 +87,11 @@ public class Main2Activity extends AppCompatActivity {
         imgMuiTenSachHK = findViewById(R.id.imgMuiTenSachHK);
 
 
-
-
         lblSachTHSub = findViewById(R.id.lblSachTHSub);
         lblSachKHSub = findViewById(R.id.lblSachKHSub);
         lblSachKDSub = findViewById(R.id.lblSachKDSub);
         lblSachTYSub = findViewById(R.id.lblSachTYSub);
         lblSachHKSub = findViewById(R.id.lblSachHKSub);
-
-
 
 
         subSachTH = findViewById(R.id.subSachTH);
@@ -95,7 +104,6 @@ public class Main2Activity extends AppCompatActivity {
         lnSubTY.setVisibility(View.GONE);
         lnSubHK = findViewById(R.id.lnSubHK);
         lnSubHK.setVisibility(View.GONE);
-
 
 
         lblSachKHSub.setOnClickListener(new View.OnClickListener() {
@@ -244,11 +252,7 @@ public class Main2Activity extends AppCompatActivity {
         });
 
 
-
     }
-
-
-
 
 
     public void menu(View view) {
@@ -260,4 +264,6 @@ public class Main2Activity extends AppCompatActivity {
         }
     }
 
-}
+    public void DocTiep(View view){
+}}
+

@@ -1,29 +1,38 @@
 package com.example.sachtruyenoffline.adapter;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.database.sqlite.SQLiteDatabase;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
-
-import com.example.sachtruyenoffline.R;
-import com.example.sachtruyenoffline.activity.ActInformation;
-import com.example.sachtruyenoffline.moder.Sach;
-import com.example.sachtruyenoffline.moder.SachKhoaHoc;
-import com.squareup.picasso.Picasso;
-
-import java.util.List;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.sachtruyenoffline.R;
+import com.example.sachtruyenoffline.activity.ActInformation;
+import com.example.sachtruyenoffline.database.SachTruyenSqlite;
+import com.example.sachtruyenoffline.moder.Sach;
+import com.squareup.picasso.Picasso;
+
+import java.util.List;
+
 
 public class SachAdapter extends RecyclerView.Adapter<SachAdapter.MyRecycleview> {
-private Context mContext;
-private List<Sach> sachList;
-private List<SachKhoaHoc> sachKhoaHocList;
+    private SachTruyenSqlite sachTruyenSqlite;
+    SharedPreferences sharedPreferences;
+    private Context mContext;
+    private List<Sach> sachList;
+
+
 
     public SachAdapter(Context mContext, List<Sach> sachList) {
         this.mContext = mContext;
@@ -35,28 +44,57 @@ private List<SachKhoaHoc> sachKhoaHocList;
     public MyRecycleview onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view;
         final LayoutInflater mInflater = LayoutInflater.from(mContext);
-        view = mInflater.inflate(R.layout.row_list_sach,parent,false);
+        view = mInflater.inflate(R.layout.row_list_sach, parent, false);
 
-        view.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(mContext, ActInformation.class);
-                mContext.startActivity(intent);
-            }
-        });
 
         return new MyRecycleview(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull MyRecycleview holder, int position) {
+    public void onBindViewHolder(@NonNull final MyRecycleview holder, final int position) {
 
-        Sach sach = sachList.get(position);
-
+        final Sach sach = sachList.get(position);
         holder.tv_Name.setText(sachList.get(position).getNameSach());
         Picasso.with(mContext).load(sach.anh).into(holder.anh);
 
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(mContext, ActInformation.class);
+                Bundle bundle = new Bundle();
+                bundle.putString("i", String.valueOf(sachList.get(position).idName));
+                intent.putExtra("TT", bundle);
+                mContext.startActivity(intent);
+            }
+        });
+        if (sachList.get(position).getLike() == 1) {
+            holder.checkBoxLike.setChecked(true);
+        } else {
+            holder.checkBoxLike.setChecked(false);
+        }
 
+        holder.checkBoxLike.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (holder.checkBoxLike.isChecked()) {
+                    sachTruyenSqlite = new SachTruyenSqlite(mContext);
+                    SQLiteDatabase sqLiteDatabase = sachTruyenSqlite.getReadableDatabase();
+                    ContentValues contentValues = new ContentValues();
+                    contentValues.put("YeuThich", 1);
+                    sqLiteDatabase.update("Name", contentValues, "IDName" + "=?", new String[]{String.valueOf(sachList.get(position).getIdName())});
+                    sqLiteDatabase.close();
+
+                } else {
+
+                    sachTruyenSqlite = new SachTruyenSqlite(mContext);
+                    SQLiteDatabase sqLiteDatabase = sachTruyenSqlite.getReadableDatabase();
+                    ContentValues contentValues = new ContentValues();
+                    contentValues.put("YeuThich", 0);
+                    sqLiteDatabase.update("Name", contentValues, "IDName" + "=?", new String[]{String.valueOf(sachList.get(position).getIdName())});
+                    sqLiteDatabase.close();
+                }
+            }
+        });
     }
 
     @Override
@@ -64,18 +102,17 @@ private List<SachKhoaHoc> sachKhoaHocList;
         return sachList.size();
     }
 
-    public class MyRecycleview extends RecyclerView.ViewHolder{
+    public class MyRecycleview extends RecyclerView.ViewHolder {
         TextView tv_Name;
         ImageView anh;
+        CheckBox checkBoxLike;
 
 
         public MyRecycleview(@NonNull View itemView) {
             super(itemView);
             anh = (ImageView) itemView.findViewById(R.id.imgAvataSach);
-            tv_Name = (TextView)  itemView.findViewById(R.id.tvNamesach);
-
-
-
+            tv_Name = (TextView) itemView.findViewById(R.id.tvNamesach);
+            checkBoxLike = (CheckBox) itemView.findViewById(R.id.btn_like);
         }
     }
 
