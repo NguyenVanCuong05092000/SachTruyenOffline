@@ -2,6 +2,7 @@ package com.example.sachtruyenoffline.adapter;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.sqlite.SQLiteDatabase;
@@ -13,8 +14,10 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.sachtruyenoffline.R;
@@ -31,6 +34,7 @@ public class SachAdapter extends RecyclerView.Adapter<SachAdapter.MyRecycleview>
     SharedPreferences sharedPreferences;
     private Context mContext;
     private List<Sach> sachList;
+    AlertDialog.Builder builder;
 
 
 
@@ -77,21 +81,43 @@ public class SachAdapter extends RecyclerView.Adapter<SachAdapter.MyRecycleview>
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (holder.checkBoxLike.isChecked()) {
-                    sachTruyenSqlite = new SachTruyenSqlite(mContext);
-                    SQLiteDatabase sqLiteDatabase = sachTruyenSqlite.getReadableDatabase();
-                    ContentValues contentValues = new ContentValues();
-                    contentValues.put("YeuThich", 1);
-                    sqLiteDatabase.update("Name", contentValues, "IDName" + "=?", new String[]{String.valueOf(sachList.get(position).getIdName())});
-                    sqLiteDatabase.close();
+
+                            sachTruyenSqlite = new SachTruyenSqlite(mContext);
+                            SQLiteDatabase sqLiteDatabase = sachTruyenSqlite.getReadableDatabase();
+                            ContentValues contentValues = new ContentValues();
+                            contentValues.put("YeuThich", 1);
+                            sqLiteDatabase.update("Name", contentValues, "IDName" + "=?", new String[]{String.valueOf(sachList.get(position).getIdName())});
+                            sqLiteDatabase.close();
 
                 } else {
 
-                    sachTruyenSqlite = new SachTruyenSqlite(mContext);
-                    SQLiteDatabase sqLiteDatabase = sachTruyenSqlite.getReadableDatabase();
-                    ContentValues contentValues = new ContentValues();
-                    contentValues.put("YeuThich", 0);
-                    sqLiteDatabase.update("Name", contentValues, "IDName" + "=?", new String[]{String.valueOf(sachList.get(position).getIdName())});
-                    sqLiteDatabase.close();
+                    builder = new AlertDialog.Builder(mContext);
+                    builder.setMessage("Xóa khỏi danh sách yêu thích ?")
+                            .setCancelable(false).setPositiveButton("Có", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            sachTruyenSqlite = new SachTruyenSqlite(mContext);
+                            SQLiteDatabase sqLiteDatabase = sachTruyenSqlite.getReadableDatabase();
+                            ContentValues contentValues = new ContentValues();
+                            contentValues.put("YeuThich", 0);
+                            sqLiteDatabase.update("Name", contentValues, "IDName" + "=?", new String[]{String.valueOf(sachList.get(position).getIdName())});
+                            sqLiteDatabase.close();
+
+                        }
+                    }).setNegativeButton("Không", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            holder.checkBoxLike.setChecked(true);
+                            dialog.cancel();
+                        }
+                    });
+
+                    AlertDialog alert1 = builder.create();
+                    alert1.setTitle("Yêu thích");
+                    alert1.show();
+
+
+
                 }
             }
         });
