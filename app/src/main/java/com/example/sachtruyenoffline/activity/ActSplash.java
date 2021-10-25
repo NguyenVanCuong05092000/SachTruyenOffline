@@ -8,7 +8,7 @@ import android.view.View;
 
 import com.example.sachtruyenoffline.R;
 
-public class ActChao extends AppCompatActivity {
+public class ActSplash extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -17,7 +17,7 @@ public class ActChao extends AppCompatActivity {
     }
 
     public void ActHome(View view) {
-        Intent intent = new Intent(this,Main2Activity.class);
+        Intent intent = new Intent(this, ActMain.class);
         startActivity(intent);
     }
 }

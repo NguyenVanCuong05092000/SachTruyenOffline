@@ -15,9 +15,10 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.sachtruyenoffline.R;
+import com.example.sachtruyenoffline.adapter.MucLucAdapter;
 import com.example.sachtruyenoffline.database.SachTruyenSqlite;
-import com.example.sachtruyenoffline.moder.MucLuc;
-import com.example.sachtruyenoffline.moder.ThongTin;
+import com.example.sachtruyenoffline.entity.MucLuc;
+import com.example.sachtruyenoffline.entity.ThongTin;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;

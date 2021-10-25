@@ -1,4 +1,4 @@
-package com.example.sachtruyenoffline.moder;
+package com.example.sachtruyenoffline.entity;
 
 public class Search {
     private int id;

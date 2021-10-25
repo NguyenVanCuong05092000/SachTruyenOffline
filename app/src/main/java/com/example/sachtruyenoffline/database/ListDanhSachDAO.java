@@ -4,17 +4,17 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
-import com.example.sachtruyenoffline.moder.Sach;
-import com.example.sachtruyenoffline.moder.SachHoiky;
-import com.example.sachtruyenoffline.moder.SachKhoaHoc;
-import com.example.sachtruyenoffline.moder.SachKinhDoanh;
-import com.example.sachtruyenoffline.moder.SachTinhyeu;
-import com.example.sachtruyenoffline.moder.Search;
-import com.example.sachtruyenoffline.moder.Truyen;
-import com.example.sachtruyenoffline.moder.TruyenCuoi;
-import com.example.sachtruyenoffline.moder.TruyenKiemHiep;
-import com.example.sachtruyenoffline.moder.TruyenVietNam;
-import com.example.sachtruyenoffline.moder.YeuThich;
+import com.example.sachtruyenoffline.entity.Sach;
+import com.example.sachtruyenoffline.entity.SachHoiky;
+import com.example.sachtruyenoffline.entity.SachKhoaHoc;
+import com.example.sachtruyenoffline.entity.SachKinhDoanh;
+import com.example.sachtruyenoffline.entity.SachTinhyeu;
+import com.example.sachtruyenoffline.entity.Search;
+import com.example.sachtruyenoffline.entity.Truyen;
+import com.example.sachtruyenoffline.entity.TruyenCuoi;
+import com.example.sachtruyenoffline.entity.TruyenKiemHiep;
+import com.example.sachtruyenoffline.entity.TruyenVietNam;
+import com.example.sachtruyenoffline.entity.YeuThich;
 
 import java.util.ArrayList;
 import java.util.List;

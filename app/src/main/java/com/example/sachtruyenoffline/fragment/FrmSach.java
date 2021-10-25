@@ -4,14 +4,12 @@ package com.example.sachtruyenoffline.fragment;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 
 import com.example.sachtruyenoffline.R;
 import com.example.sachtruyenoffline.adapter.SachAdapter;
@@ -20,13 +18,12 @@ import com.example.sachtruyenoffline.adapter.SachKhoaHocAdapter;
 import com.example.sachtruyenoffline.adapter.SachKinhDoanhAdapter;
 import com.example.sachtruyenoffline.adapter.SachTinhYeuAdapter;
 import com.example.sachtruyenoffline.database.ListDanhSachDAO;
-import com.example.sachtruyenoffline.moder.Sach;
-import com.example.sachtruyenoffline.moder.SachHoiky;
-import com.example.sachtruyenoffline.moder.SachKhoaHoc;
-import com.example.sachtruyenoffline.moder.SachKinhDoanh;
-import com.example.sachtruyenoffline.moder.SachTinhyeu;
+import com.example.sachtruyenoffline.entity.Sach;
+import com.example.sachtruyenoffline.entity.SachHoiky;
+import com.example.sachtruyenoffline.entity.SachKhoaHoc;
+import com.example.sachtruyenoffline.entity.SachKinhDoanh;
+import com.example.sachtruyenoffline.entity.SachTinhyeu;
 
-import java.util.ArrayList;
 import java.util.List;
 
 

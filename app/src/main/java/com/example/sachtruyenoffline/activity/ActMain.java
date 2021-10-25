@@ -8,16 +8,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AutoCompleteTextView;
-import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.view.GravityCompat;
-import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.navigation.ui.AppBarConfiguration;
 import androidx.viewpager.widget.ViewPager;
 
 import com.example.sachtruyenoffline.R;
@@ -28,15 +20,12 @@ import com.example.sachtruyenoffline.database.SachTruyenSqlite;
 import com.example.sachtruyenoffline.fragment.FrmSach;
 import com.example.sachtruyenoffline.fragment.FrmTruyen;
 import com.example.sachtruyenoffline.fragment.FrmYeuthich;
-import com.example.sachtruyenoffline.moder.Sach;
-import com.example.sachtruyenoffline.moder.Search;
-import com.google.android.material.navigation.NavigationView;
+import com.example.sachtruyenoffline.entity.Search;
 import com.google.android.material.tabs.TabLayout;
 
 import java.util.ArrayList;
-import java.util.List;
 
-public class Main2Activity extends AppCompatActivity {
+public class ActMain extends AppCompatActivity {
     private TabLayout tabLayout;
     private ViewPager viewPager;
     private FrmYeuthich frmYeuthich;
@@ -82,7 +71,7 @@ public class Main2Activity extends AppCompatActivity {
                         cursor.moveToFirst();
                         while (!cursor.isAfterLast()) {
                             String idName = cursor.getString(cursor.getColumnIndex("IDName"));
-                            Intent intent = new Intent(Main2Activity.this, ActInformation.class);
+                            Intent intent = new Intent(ActMain.this, ActInformation.class);
                             Bundle bundle = new Bundle();
                             bundle.putString("i", idName);
                             intent.putExtra("TT", bundle);

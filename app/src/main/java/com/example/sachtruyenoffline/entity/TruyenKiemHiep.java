@@ -1,23 +1,24 @@
-package com.example.sachtruyenoffline.moder;
+package com.example.sachtruyenoffline.entity;
 
-public class SachTinhyeu {
+public class TruyenKiemHiep {
     public int idName;
     public String styles;
     public String NameSach;
     public String anh;
     public int like;
 
-    public SachTinhyeu() {
+    public TruyenKiemHiep() {
     }
 
-    public SachTinhyeu(int idName, String styles, String nameSach, String anh, int like) {
+
+
+    public TruyenKiemHiep(int idName, String styles, String nameSach, String anh, int like) {
         this.idName = idName;
         this.styles = styles;
         NameSach = nameSach;
         this.anh = anh;
         this.like = like;
     }
-
 
     public int getIdName() {
         return idName;

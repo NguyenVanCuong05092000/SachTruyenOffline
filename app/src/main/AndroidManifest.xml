@@ -5,7 +5,7 @@
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
-        android:name=".moder.MyApplication"
+        android:name=".entity.MyApplication"
         android:allowBackup="true"
         android:label="@string/app_name"
         android:supportsRtl="true"
@@ -27,11 +27,11 @@
 
         </activity>
         <activity
-            android:name=".activity.Main2Activity"
+            android:name=".activity.ActMain"
             android:label="@string/title_activity_main2"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".activity.ActChao"
+            android:name=".activity.ActSplash"
             android:theme="@style/FullScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

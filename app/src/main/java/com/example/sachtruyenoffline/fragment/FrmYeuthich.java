@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.sachtruyenoffline.R;
 import com.example.sachtruyenoffline.adapter.YeuThichAdapter;
 import com.example.sachtruyenoffline.database.ListDanhSachDAO;
-import com.example.sachtruyenoffline.moder.YeuThich;
+import com.example.sachtruyenoffline.entity.YeuThich;
 
 import java.util.List;
 

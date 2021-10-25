@@ -1,24 +1,23 @@
-package com.example.sachtruyenoffline.moder;
+package com.example.sachtruyenoffline.entity;
 
-public class TruyenCuoi {
+public class SachTinhyeu {
     public int idName;
     public String styles;
     public String NameSach;
     public String anh;
     public int like;
 
-    public TruyenCuoi() {
+    public SachTinhyeu() {
     }
 
-
-
-    public TruyenCuoi(int idName, String styles, String nameSach, String anh, int like) {
+    public SachTinhyeu(int idName, String styles, String nameSach, String anh, int like) {
         this.idName = idName;
         this.styles = styles;
         NameSach = nameSach;
         this.anh = anh;
         this.like = like;
     }
+
 
     public int getIdName() {
         return idName;
@@ -51,7 +50,6 @@ public class TruyenCuoi {
     public void setAnh(String anh) {
         this.anh = anh;
     }
-
     public int getLike() {
         return like;
     }

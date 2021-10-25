@@ -1,7 +1,5 @@
 package com.example.sachtruyenoffline.fragment;
 
-import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -13,18 +11,16 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.sachtruyenoffline.R;
-import com.example.sachtruyenoffline.adapter.SachAdapter;
 import com.example.sachtruyenoffline.adapter.TruyenAdapter;
 import com.example.sachtruyenoffline.adapter.TruyenCuoiAdapter;
 import com.example.sachtruyenoffline.adapter.TruyenKiemHiepAdapter;
 import com.example.sachtruyenoffline.adapter.TruyenVietNamAdapter;
 import com.example.sachtruyenoffline.database.ListDanhSachDAO;
-import com.example.sachtruyenoffline.moder.Truyen;
-import com.example.sachtruyenoffline.moder.TruyenCuoi;
-import com.example.sachtruyenoffline.moder.TruyenKiemHiep;
-import com.example.sachtruyenoffline.moder.TruyenVietNam;
+import com.example.sachtruyenoffline.entity.Truyen;
+import com.example.sachtruyenoffline.entity.TruyenCuoi;
+import com.example.sachtruyenoffline.entity.TruyenKiemHiep;
+import com.example.sachtruyenoffline.entity.TruyenVietNam;
 
-import java.util.ArrayList;
 import java.util.List;
 
 

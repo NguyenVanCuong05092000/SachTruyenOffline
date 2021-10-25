@@ -1,22 +1,17 @@
-package com.example.sachtruyenoffline.activity;
+package com.example.sachtruyenoffline.adapter;
 
 import android.content.Context;
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.sachtruyenoffline.R;
-import com.example.sachtruyenoffline.moder.MucLuc;
-import com.example.sachtruyenoffline.moder.Sach;
-import com.example.sachtruyenoffline.moder.SachKhoaHoc;
-import com.example.sachtruyenoffline.moder.ThongTin;
-import com.squareup.picasso.Picasso;
+import com.example.sachtruyenoffline.activity.ActShow;
+import com.example.sachtruyenoffline.entity.MucLuc;
+import com.example.sachtruyenoffline.entity.ThongTin;
 
 import java.util.List;
 

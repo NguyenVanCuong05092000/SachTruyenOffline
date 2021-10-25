@@ -1,12 +1,11 @@
 package com.example.sachtruyenoffline.adapter;
 
 import android.content.Context;
-import android.util.Log;
 import android.widget.ArrayAdapter;
 import android.widget.Filter;
 import android.widget.Filterable;
 
-import com.example.sachtruyenoffline.moder.Search;
+import com.example.sachtruyenoffline.entity.Search;
 
 import java.util.ArrayList;
 

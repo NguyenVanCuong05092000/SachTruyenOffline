@@ -1,6 +1,5 @@
 package com.example.sachtruyenoffline.activity;
 
-import android.app.Activity;
 import android.content.ContentValues;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -25,7 +24,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.sachtruyenoffline.R;
 import com.example.sachtruyenoffline.database.SachTruyenSqlite;
-import com.example.sachtruyenoffline.moder.MucLuc;
+import com.example.sachtruyenoffline.entity.MucLuc;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;

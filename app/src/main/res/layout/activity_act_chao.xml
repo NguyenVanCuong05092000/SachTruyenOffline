@@ -6,6 +6,6 @@
     android:background="@drawable/background_chao"
     android:layout_height="match_parent"
     android:onClick="ActHome"
-    tools:context=".activity.ActChao">
+    tools:context=".activity.ActSplash">
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -12,8 +12,7 @@ import android.widget.TextView;
 import com.example.sachtruyenoffline.R;
 import com.example.sachtruyenoffline.activity.ActInformation;
 import com.example.sachtruyenoffline.database.SachTruyenSqlite;
-import com.example.sachtruyenoffline.moder.Sach;
-import com.example.sachtruyenoffline.moder.YeuThich;
+import com.example.sachtruyenoffline.entity.YeuThich;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;

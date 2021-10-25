@@ -1,4 +1,4 @@
-package com.example.sachtruyenoffline.moder;
+package com.example.sachtruyenoffline.entity;
 
 import android.app.Application;
 import android.content.pm.PackageInfo;
